@@ -10,6 +10,7 @@ class ManageSub extends Component {
       firstName: '',
       sub: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -17,11 +18,31 @@ class ManageSub extends Component {
       const user = JSON.parse(localStorage.user)
 
       this.setState({
+        error: false,
         email: user.email,
         firstName: user.firstName,
         sub: user.role[0]
       })
+    } else {
+      // prevent page access unless logged in
+      browserHistory.push('/')
     }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+
+    const optionsRadiosValue = event.target.elements.optionsRadios.value
+    console.log(optionsRadiosValue);
+
+    auth.updateSubscription(optionsRadiosValue, referenceId, (g2g) => {
+      console.log('g2g?', g2g);
+      if (!g2g) {
+        return this.setState({ error: true })
+      } else {
+        this.setState({error: false})
+      }
+    })
   }
 
   render() {
@@ -30,16 +51,45 @@ class ManageSub extends Component {
     return (
       <div>
         <div>
-        <div>Current Subscription</div>
-        <div>{this.state.sub}</div>
+          <div>Current Subscription</div>
+          <div>{this.state.sub}</div>
         </div>
         <div>
-        <div>First Name</div>
-        <div>{this.state.firstName}</div>
+          <div>First Name</div>
+          <div>{this.state.firstName}</div>
         </div>
         {this.props.children}
-        <form>
-        </form>
+        <div className="col-xs-12 form-row">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <div className="radio">
+                <label>
+                  <input
+                    id="optionsRadios1"
+                    type="radio"
+                    name="optionsRadios"
+                    value="500"
+                    required
+                    tabIndex="1"/>
+                  $500 Renew Subscription
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    id="optionsRadios3"
+                    type="radio"
+                    name="optionsRadios"
+                    value="0"
+                    required
+                    tabIndex="2"/>
+                  Cancel Subscription
+                </label>
+              </div>
+            </div>
+            <button tabIndex="4" type="submit" className="btn btn-default continue change-sub-btn">Update Subscription</button>
+          </form>
+        </div>
       </div>
     )
   }

@@ -1,20 +1,18 @@
 import axios from 'axios'
 
 const BASE_API_URL = 'https://api.myomnibox.com/v1/'
+const BASE_CHARGIFY_URL = 'https://omniboxtv.chargify.com/'
 
 module.exports = {
   boxLogin(email, password, token, cb) {
-    console.log('1');
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
-      console.log('2');
       if (cb) cb(true)
       this.onChange(true)
       return
     }
 
     if (token.length > 0) {
-      console.log('3');
       axios.get(`${BASE_API_URL}v2-tokens?code=${token}`)
         .then((res) => {
           console.log(res);
@@ -47,19 +45,38 @@ module.exports = {
         })
 
     } else {
-      console.log('4');
       axios.post(`${BASE_API_URL}v2-web-login`, {
         email,
         password
       })
       .then((res) => {
-        console.log('success 5', res);
+        console.log('success', res);
         localStorage.setItem('user', JSON.stringify(res.data))
         if (cb) cb(true)
         this.onChange(true)
       })
       .catch((error) => {
-        console.log('error 6', error);
+        console.log('error', error);
+        if (cb) cb(false)
+        this.onChange(false)
+      })
+    }
+  },
+
+  updateSubscription(subValue, subscriptionId, cb) {
+    cb = arguments[arguments.length - 1]
+
+    if (subValue > 0) {
+      axios.post(`${BASE_CHARGIFY_URL}/subscriptions/${subscriptionId}/charges.json`, {
+        amount: subValue
+      })
+      .then((res) => {
+        console.log('success', res);
+        if (cb) cb(true)
+        this.onChange(true)
+      })
+      .catch((error) => {
+        console.log('error', error);
         if (cb) cb(false)
         this.onChange(false)
       })

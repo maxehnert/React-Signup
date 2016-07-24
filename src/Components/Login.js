@@ -13,7 +13,7 @@ class Login extends Component {
     //  tokenValue: ""
    };
 
-   this.handleSubmit = this.handleSubmit.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange = (event) => {
@@ -59,22 +59,22 @@ console.log('refs ',this.refs, this.refs.token.value.length);
           <div className="form-group">
             <label htmlFor="login-password">Password</label>
             <input
-            type="password"
-            className="form-control"
-            id="login-password"
-            placeholder="Password"
-            required
-            ref="password"
-            onChange={this.handleChange}/>
+              type="password"
+              className="form-control"
+              id="login-password"
+              placeholder="Password"
+              required
+              ref="password"
+              onChange={this.handleChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="login-token">Token</label>
             <input
-            type="text"
-            className="form-control"
-            id="login-token"
-            placeholder="Token"
-            ref="token"
+              type="text"
+              className="form-control"
+              id="login-token"
+              placeholder="Token"
+              ref="token"
             onChange={this.handleChange}/>
           </div>
 
