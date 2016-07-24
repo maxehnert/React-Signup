@@ -5,6 +5,7 @@ class Signup extends Component {
     super()
     console.log('props signup ', props);
 console.log('state signup ', this.state);
+
   }
 
   render() {

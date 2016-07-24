@@ -5,8 +5,15 @@ class SignupStep3 extends Component {
   constructor(props) {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
+    React.Children.map(props.children, (child, i) => {
+        console.log(child);
+    })
   }
-
+content() {
+  React.Children.map(this.props.children, (child, i) => {
+      console.log(child);
+  })
+}
   handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value

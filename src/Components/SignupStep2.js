@@ -5,12 +5,14 @@ class SignupStep2 extends Component {
   constructor(props) {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
+    console.log('props sign2',props);
+
   }
 
   handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
-
+    this.props.name = value;
     this.setState({[name]: value});
     console.log(this.state);
   }
@@ -111,5 +113,14 @@ class SignupStep2 extends Component {
     )
   }
 }
+
+SignupStep2.propTypes = {
+  signupAddress: React.PropTypes.string,
+  signupAddress2: React.PropTypes.string,
+  signupCity: React.PropTypes.string,
+  signupZip: React.PropTypes.string,
+  signupCountry: React.PropTypes.string,
+
+};
 
 export default SignupStep2
