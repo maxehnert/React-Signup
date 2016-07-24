@@ -43,47 +43,50 @@ console.log('refs ',this.refs, this.refs.token.value.length);
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="login-email">Email address</label>
-          <input
-            type="email"
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="login-email">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="login-email"
+              placeholder="Email"
+              required
+              ref="email"
+              onChange={this.handleChange}/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="login-password">Password</label>
+            <input
+            type="password"
             className="form-control"
-            id="login-email"
-            placeholder="Email"
+            id="login-password"
+            placeholder="Password"
             required
-            ref="email"
+            ref="password"
             onChange={this.handleChange}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="login-password">Password</label>
-          <input
-          type="password"
-          className="form-control"
-          id="login-password"
-          placeholder="Password"
-          required
-          ref="password"
-          onChange={this.handleChange}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="login-token">Token</label>
-          <input
-          type="text"
-          className="form-control"
-          id="login-token"
-          placeholder="Token"
-          ref="token"
-          onChange={this.handleChange}/>
-        </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="login-token">Token</label>
+            <input
+            type="text"
+            className="form-control"
+            id="login-token"
+            placeholder="Token"
+            ref="token"
+            onChange={this.handleChange}/>
+          </div>
 
-        {/*<label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-        <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />*/}
-        <button type="submit" className="btn btn-default">login</button>
-        {this.state.error && (
-          <p>Bad login information</p>
-        )}
-      </form>
+          {/*<label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
+          <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />*/}
+          <button type="submit" className="btn btn-default">login</button>
+          {this.state.error && (
+            <p>Bad login information</p>
+          )}
+        </form>
+        {this.props.children}
+      </div>
     )
   }
 }

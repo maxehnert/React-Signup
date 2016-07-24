@@ -36,16 +36,16 @@ class App extends Component {
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     auth.onChange = this.updateAuth.bind(this)
     auth.login()
   }
 
   render() {
-    console.log('App');
+    console.log('App', this.state);
     return (
       <div>
-        <h1>React Router Tutorial</h1>
+        <h1>React Signup App</h1>
         <ul role="nav">
           <li>
             {this.state.loggedIn ? (

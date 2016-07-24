@@ -14,12 +14,11 @@ render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
-      <Route path="/login" component={Login}>
-        <Route path="/manage-subscription" component={ManageSub}/>
-      </Route>
+      <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup}>
 
       </Route>
+      <Route path="/manage-subscription" component={ManageSub}/>
     </Route>
   </Router>
 ),document.getElementById('root'));

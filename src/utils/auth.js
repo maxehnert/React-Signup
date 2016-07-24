@@ -28,7 +28,7 @@ module.exports = {
           })
           .then((res) => {
             console.log('success', res);
-            localStorage.setItem('user', JSON.stringify(res))
+            localStorage.setItem('user', JSON.stringify(res.data))
 
             localStorage.tokenUUID = resToken[0].uuid
             if (cb) cb(true)
@@ -54,7 +54,7 @@ module.exports = {
       })
       .then((res) => {
         console.log('success 5', res);
-        localStorage.setItem('user', JSON.stringify(res))
+        localStorage.setItem('user', JSON.stringify(res.data))
         if (cb) cb(true)
         this.onChange(true)
       })
