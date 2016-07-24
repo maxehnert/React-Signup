@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import auth from '../utils/auth'
-import NavLink from './NavLink'
 
 class Signup extends Component {
-  constructor() {
- super();
- this. _handleClick = this. _handleClick.bind(this);
- this.state = Store.getState();
-}
+  constructor(props) {
+    super()
+    console.log('props signup ', props);
+console.log('state signup ', this.state);
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    )
+  }
 }
 
-export default Signup;
+export default Signup
