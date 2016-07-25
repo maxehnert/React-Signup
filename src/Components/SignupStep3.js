@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
-import signup from '../utils/signup'
+import { browserHistory } from 'react-router'
+import { validateCC, saveToLS } from '../utils/signup'
 
 class SignupStep3 extends Component {
   constructor(props) {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleKeyCode = this.handleKeyCode.bind(this)
-    this.state = {
-      'signupCardExp' : ''
+  }
+
+  componentWillMount() {
+    if (localStorage.SignupStep3) {
+      const step3Values = JSON.parse(localStorage.SignupStep3)
+      this.setState(step3Values)
+    } else {
+      this.setState({
+        signupCardNumber: "",
+        signupCardExp: "",
+        signupCoupon: ""
+      })
     }
   }
 
   handleChange = (event) => {
     const name = event.target.name
     let value = event.target.value
-    // console.log(event);
 
     // Adds the name of the subscription
     if (name === 'signupPrice') {
@@ -23,7 +33,6 @@ class SignupStep3 extends Component {
     }
 
     this.setState({[name]: value})
-    console.log(this.state);
   }
 
   handleKeyCode(event) {
@@ -55,10 +64,10 @@ class SignupStep3 extends Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    signup.validateCC(this.state, (validCC) => {
+    validateCC(this.state, (validCC) => {
       if (validCC) {
         // add it to localStorage and navigate to next page
-        signup.saveToLS(this.state, 'SignupStep3')
+        saveToLS(this.state, 'SignupStep3')
         const path = `/signup/review-information`
         browserHistory.push(path)
       } else {
@@ -74,7 +83,8 @@ console.log(this.state);
 
   render() {
     return (
-      <div>
+      <div className="row container">
+        <h2 className="title">Signup Step 3 of 3</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-row">
             <div className="form-group">
@@ -87,7 +97,8 @@ console.log(this.state);
                 tabIndex="1"
                 className="form-control signup-card-number"
                 maxLength="20"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupCardNumber}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-cvv" className="control-label">CVV</label>
@@ -111,7 +122,9 @@ console.log(this.state);
                 tabIndex="3"
                 className="form-control signup-expiration-month-year signup-card-exp"
                 maxLength="7"
-                onKeyUp={this.handleKeyCode} onChange={this.handleChange} value={this.state.signupCardExp}/>
+                onKeyUp={this.handleKeyCode}
+                onChange={this.handleChange}
+                defaultValue={this.state.signupCardExp}/>
             </div>
           </div>
           <div className="form-row">
@@ -122,7 +135,8 @@ console.log(this.state);
                 name="signupCoupon"
                 tabIndex="4"
                 className="form-control signup-coupon"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupCoupon}/>
             </div>
             <div className="form-group">
               <div className="radio">

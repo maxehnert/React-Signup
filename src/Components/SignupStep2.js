@@ -1,34 +1,48 @@
 import React, { Component } from 'react'
-import signup from '../utils/signup'
+import { browserHistory } from 'react-router'
+import { saveToLS } from '../utils/signup'
 
 class SignupStep2 extends Component {
   constructor(props) {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
-    console.log('props sign2',props);
-    this.state = {signupCountry: 'US'}
+  }
+
+  componentWillMount() {
+    if (localStorage.SignupStep2) {
+      const step2Values = JSON.parse(localStorage.SignupStep2)
+      this.setState(step2Values)
+      console.log(this.state);
+    } else {
+      this.setState({
+        signupAddress: "",
+        signupAddress2: "",
+        signupCity: "",
+        signupState: "",
+        signupZip: "",
+        signupCountry: "US"
+      })
+    }
   }
 
   handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
     this.setState({[name]: value});
-    console.log(this.state);
   }
 
   handleSubmit(event) {
     event.preventDefault()
 
-    signup.saveToLS(this.state, 'SignupStep2')
+    saveToLS(this.state, 'SignupStep2')
     const path = `/signup/step-3`
     browserHistory.push(path)
-
-    console.log(this.state);
   }
 
   render() {
     return (
-      <div>
+      <div className="row container">
+        <h2 className="title">Signup Step 2 of 3</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-row">
             <div className="form-group">
@@ -40,7 +54,8 @@ class SignupStep2 extends Component {
                 tabIndex="1"
                 required
                 className="form-control signup-address"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupAddress}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-address-2" className="control-label">Billing Address 2</label>
@@ -50,7 +65,8 @@ class SignupStep2 extends Component {
                 autoComplete="address-line2"
                 tabIndex="2"
                 className="form-control signup-address-2"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupAddress2}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-city" className="control-label">Billing City</label>
@@ -60,11 +76,12 @@ class SignupStep2 extends Component {
                 tabIndex="3"
                 required
                 className="form-control signup-city"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupCity}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-state" className="control-label">Billing State</label>
-              <select name="signupState" tabIndex="4" required className="form-control signup-state"  onChange={this.handleChange}>
+              <select name="signupState" tabIndex="4" required className="form-control signup-state"  onChange={this.handleChange} defaultValue={this.state.signupState}>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -126,7 +143,8 @@ class SignupStep2 extends Component {
                 tabIndex="5"
                 required
                 className="form-control signup-zip"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupZip}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-country" className="control-label">Billing Country</label>
@@ -136,8 +154,8 @@ class SignupStep2 extends Component {
                 tabIndex="6"
                 required
                 className="form-control signup-country"
-                defaultValue="US"
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                defaultValue={this.state.signupCountry}/>
             </div>
           </div>
           <button tabIndex="7" type="submit" className="btn btn-default continue subscribe-btn-2">Continue</button>
@@ -146,14 +164,5 @@ class SignupStep2 extends Component {
     )
   }
 }
-
-SignupStep2.propTypes = {
-  signupAddress: React.PropTypes.string,
-  signupAddress2: React.PropTypes.string,
-  signupCity: React.PropTypes.string,
-  signupZip: React.PropTypes.string,
-  signupCountry: React.PropTypes.string,
-
-};
 
 export default SignupStep2

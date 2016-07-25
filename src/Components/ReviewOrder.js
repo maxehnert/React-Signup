@@ -1,31 +1,25 @@
 import React, { Component } from 'react'
-import signup from '../utils/signup'
-import {UserInfo, SubInfo} from './ReviewItems'
+import { signupUser } from '../utils/signup'
+import { UserInfo, SubInfo } from './ReviewItems'
 
 class ReviewOrder extends Component {
   constructor(props) {
     super()
-    this.handleSubmit = this.handleSubmit.bind(this)
-    console.log('props review',props);
-    console.log('state review ', this.state);
-
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleChange = (event) => {
-    const name = event.target.name
-    const value = event.target.value
-
-    this.setState({[name]: value});
-    console.log(this.state);
-  }
-
-  handleSubmit(event) {
+  handleClick(event) {
     event.preventDefault()
-
-    signup.saveToLS(this.state, 'ReviewOrder')
-
-
-console.log(this.state);
+    const value = event.currentTarget.value
+    console.log(event.currentTarget.value);
+    if (value === submit) {
+      // Do all the create user and send infor off to chargify stuff
+      // Then navigate to the manage-subscription page
+    } else {
+      // else go back to the begginning to check or change info again
+      const path = `/signup/step-1`
+      browserHistory.push(path)
+    }
   }
 
   render() {
@@ -37,41 +31,36 @@ console.log(this.state);
     const secondSet = Object.assign({}, step2Values, step3Values)
 
     return (
-      <div>
-        <div className="review-container">
-          <h2 className="title">Review Information</h2>
-          <div className="row">
-            <div className="col-xs-12 col-sm-12">
-              <div className="col-xs-12 col-md-6 review-container-info">
-                {Object.keys(firstSet).map((key) => {
-                  if (key === 'token' || key === 'signupPassword1' || key === 'signupPassword2') return
-                  // console.log(key, firstSet[key])
-                  return(
-                    <UserInfo baseKey={key} baseValue={firstSet[key]} />
-                  )
-                })}
-              </div>
-              <div className="col-xs-12 col-md-6 review-container-info">
-                {Object.keys(secondSet).map((key) => {
-                  if (key === 'signupCoupon' || key === 'signupPrice' || key === 'signupSubName' || key === 'signupAddress' || key === 'signupAddress2') return
-                  // console.log(key, secondSet[key])
-                  return(
-                    <UserInfo baseKey={key} baseValue={secondSet[key]} />
-                  )
-                })}
-              </div>
+      <div className="row container">
+        <h2 className="title">Review Information</h2>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 review-container">
+            <div className="col-xs-12 col-md-6 review-container-info">
+              {Object.keys(firstSet).map((key) => {
+                if (key === 'token' || key === 'signupPassword1' || key === 'signupPassword2') return
+                return(
+                  <UserInfo baseKey={key} baseValue={firstSet[key]} />
+                )
+              })}
             </div>
-            <div className="col-xs-12 col-sm-12 review-container-total">
-              <SubInfo baseKey={'subscriptionType'} baseValue={step3Values.signupSubName} />
-              <SubInfo baseKey={'total'} baseValue={step3Values.signupPrice} />
-            </div>
-            <div className="col-xs-12 col-sm-12">
-              <button value="submit" type="button" className="btn btn-default continue final-submit">Finalize Order</button><br/>
-              <button value="submit" type="button" className="btn btn-default continue final-edit-information">Edit Information</button>
+            <div className="col-xs-12 col-md-6 review-container-info">
+              {Object.keys(secondSet).map((key) => {
+                if (key === 'signupCoupon' || key === 'signupPrice' || key === 'signupSubName' || key === 'signupAddress' || key === 'signupAddress2') return
+                return(
+                  <UserInfo baseKey={key} baseValue={secondSet[key]} />
+                )
+              })}
             </div>
           </div>
+          <div className="col-xs-12 col-sm-12 review-container-total">
+            <SubInfo baseKey='Subscription Type' baseValue={step3Values.signupSubName} />
+            <SubInfo baseKey='Total' baseValue={step3Values.signupPrice} />
+          </div>
+          <div className="col-xs-12 col-sm-12">
+            <button value="submit" type="button" className="btn btn-default continue final-submit" onClick={this.handleClick}>Finalize Order</button><br/>
+            <button value="review" type="button" className="btn btn-default continue final-edit-information" onClick={this.handleClick}>Edit Information</button>
+          </div>
         </div>
-
 
         {/*<div className="review-container">
           <h2 className="title">Review Information</h2>

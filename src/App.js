@@ -50,13 +50,13 @@ class App extends Component {
           <li>
             {this.state.loggedIn ? (
               <NavLink to="/logout">Log out</NavLink>
-            ) : (
-              <NavLink to="/login">Sign in</NavLink>
+              ) : (
+                <NavLink to="/login">Sign in</NavLink>
             )}
           </li>
           <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
-          <li><NavLink to="/repos">Repos</NavLink></li>
+          {/*<li><NavLink to="/repos">Repos</NavLink></li>*/}
         </ul>
         {this.props.children}
       </div>

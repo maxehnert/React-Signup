@@ -1,5 +1,165 @@
-body {
+/*body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}*/
+
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #961D1D;
+  color: #E8E8E8;
+  position: relative;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.header {
+  display: none;
+
+  &.header-visible {
+    display: block;
+  }
+}
+
+.container {
+  position: relative;
+  padding-bottom: 50px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  p {
+    text-align: center;
+  }
+}
+
+.overlay {
+  display: none;
+
+  &.visible {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.8;
+    background-color: #000000;
+  }
+
+  &.show-spinner {
+    .spinner {
+      position: absolute;
+      top: 40%;
+      transform: translateX(-50%) translateY(-50%);
+      left: 0;
+      right: 0;
+
+    	width: 50px;
+    	height: 50px;
+    	clear: both;
+    	margin: 20px auto;
+
+    	border: 4px #867b7b solid;
+    	border-top: 4px #FFF solid;
+    	border-radius: 50%;
+    	animation: spCircRot 1s infinite linear;
+    }
+  }
+}
+
+@keyframes spCircRot {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  left: 50%;
+  padding-top: 30px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+
+/*// Omni Logo image*/
+.logo img {
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+/*// .token, .login-email, .login-password {*/
+input.form-control, select.form-control {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.continue {
+  width: 90%;
+}
+
+.support {
+  padding: 10px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .review-container {
+    padding: 0;
+  }
+}
+
+.review-container-info,
+.review-container-total {
+  background-color: #FFF;
+  box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+  color: #000;
+  margin: 10px 0;
+}
+
+.review-container-info {
+  text-align: left;
+  min-height: 511px;
+}
+
+.review-container-info > div {
+  padding:10px 0;
+}
+
+.review-title {
+  color: #3e3e3e;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.review-value {
+  font-size: 20px;
+}
+
+.login-start-btn,
+.final-submit {
+  margin-bottom: 20px;
 }

@@ -43,7 +43,9 @@ console.log('refs ',this.refs, this.refs.token.value.length);
 
   render() {
     return (
-      <div>
+      <div className="row container">
+        <h2 className="title">Login</h2>
+        <p className="description">Enter your email address and password to Login</p>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="login-email">Email address</label>
@@ -68,19 +70,19 @@ console.log('refs ',this.refs, this.refs.token.value.length);
               onChange={this.handleChange}/>
           </div>
           <div className="form-group">
-            <label htmlFor="login-token">Token</label>
+            <label htmlFor="login-token">Token *Optional</label>
             <input
               type="text"
               className="form-control"
               id="login-token"
               placeholder="Token"
               ref="token"
-            onChange={this.handleChange}/>
+              onChange={this.handleChange}/>
           </div>
 
           {/*<label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
           <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />*/}
-          <button type="submit" className="btn btn-default">login</button>
+          <button type="submit" className="btn btn-default continue">login</button>
           {this.state.error && (
             <p>Bad login information</p>
           )}

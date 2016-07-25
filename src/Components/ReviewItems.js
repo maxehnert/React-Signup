@@ -15,14 +15,13 @@ const UserInfo = (props) => {
 }
 
 const SubInfo = (props) => {
-  console.log(props);
-  const name = props.baseKey.split('signup')[1]
-  const nameLower = name//.toLowerCase()
+  const name = props.baseKey.split(' ').join('')
+
   return (
     <div>
-      <div className={"col-xs-12 col-md-6 review-" + nameLower}>
-        <div className={"review-title review-" + nameLower + "-title"}>{name}</div>
-        <div className={"review-value review-" + nameLower + "-value"}>{props.baseValue}</div>
+      <div className={"col-xs-12 col-md-6 review-" + name}>
+        <div className={"review-title review-" + name + "-title"}>{props.baseKey}</div>
+        <div className={"review-value review-" + name + "-value"}>{props.baseValue}</div>
       </div>
     </div>
   )

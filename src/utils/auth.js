@@ -132,3 +132,5 @@ function pretendRequest(email, pass, cb) {
     }
   }, 0)
 }
+
+export { BASE_API_URL, BASE_CHARGIFY_URL }

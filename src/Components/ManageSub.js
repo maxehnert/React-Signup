@@ -34,7 +34,7 @@ class ManageSub extends Component {
 
     const optionsRadiosValue = event.target.elements.optionsRadios.value
     console.log(optionsRadiosValue);
-
+console.log(user);
     auth.updateSubscription(optionsRadiosValue, referenceId, (g2g) => {
       console.log('g2g?', g2g);
       if (!g2g) {
@@ -49,16 +49,19 @@ class ManageSub extends Component {
     console.log('props', this.props);
     console.log('state', this.state);
     return (
-      <div>
+      <div className="row container">
+        <div>
+          <div>First Name</div>
+          <div>{this.state.firstName}</div>
+          <div>Last Name</div>
+          <div>{this.state.lastName}</div>
+          <div>Email</div>
+          <div>{this.state.email}</div>
+        </div>
         <div>
           <div>Current Subscription</div>
           <div>{this.state.sub}</div>
         </div>
-        <div>
-          <div>First Name</div>
-          <div>{this.state.firstName}</div>
-        </div>
-        {this.props.children}
         <div className="col-xs-12 form-row">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
