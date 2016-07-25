@@ -6,13 +6,12 @@ class SignupStep2 extends Component {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
     console.log('props sign2',props);
-
+    this.state = {signupCountry: 'US'}
   }
 
   handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
-    this.props.name = value;
     this.setState({[name]: value});
     console.log(this.state);
   }
@@ -21,6 +20,8 @@ class SignupStep2 extends Component {
     event.preventDefault()
 
     signup.saveToLS(this.state, 'SignupStep2')
+    const path = `/signup/step-3`
+    browserHistory.push(path)
 
     console.log(this.state);
   }
@@ -32,19 +33,38 @@ class SignupStep2 extends Component {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="signup-address" className="control-label">Billing Address</label>
-              <input type="text" name="signupAddress" autoComplete="address-line1" tabIndex="1" className="form-control signup-address"  onChange={this.handleChange}/>
+              <input
+                type="text"
+                name="signupAddress"
+                autoComplete="address-line1"
+                tabIndex="1"
+                required
+                className="form-control signup-address"
+                onChange={this.handleChange}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-address-2" className="control-label">Billing Address 2</label>
-              <input type="text" name="signupAddress2" autoComplete="address-line2" tabIndex="2" className="form-control signup-address-2"  onChange={this.handleChange}/>
+              <input
+                type="text"
+                name="signupAddress2"
+                autoComplete="address-line2"
+                tabIndex="2"
+                className="form-control signup-address-2"
+                onChange={this.handleChange}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-city" className="control-label">Billing City</label>
-              <input type="text" name="signupCity" tabIndex="3" className="form-control signup-city"  onChange={this.handleChange}/>
+              <input
+                type="text"
+                name="signupCity"
+                tabIndex="3"
+                required
+                className="form-control signup-city"
+                onChange={this.handleChange}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-state" className="control-label">Billing State</label>
-              <select name="signupState" tabIndex="4" className="form-control signup-state"  onChange={this.handleChange}>
+              <select name="signupState" tabIndex="4" required className="form-control signup-state"  onChange={this.handleChange}>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -100,11 +120,24 @@ class SignupStep2 extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="signup-zip" className="control-label">Billing Zip</label>
-              <input type="text" name="signupZip" tabIndex="5" className="form-control signup-zip"  onChange={this.handleChange}/>
+              <input
+                type="text"
+                name="signupZip"
+                tabIndex="5"
+                required
+                className="form-control signup-zip"
+                onChange={this.handleChange}/>
             </div>
             <div className="form-group">
               <label htmlFor="signup-country" className="control-label">Billing Country</label>
-              <input type="text" name="signupCountry" tabIndex="6" className="form-control signup-country" defaultValue="US"  onChange={this.handleChange}/>
+              <input
+                type="text"
+                name="signupCountry"
+                tabIndex="6"
+                required
+                className="form-control signup-country"
+                defaultValue="US"
+                onChange={this.handleChange}/>
             </div>
           </div>
           <button tabIndex="7" type="submit" className="btn btn-default continue subscribe-btn-2">Continue</button>

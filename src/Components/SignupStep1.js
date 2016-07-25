@@ -18,7 +18,13 @@ class SignupStep1 extends Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    signup.saveToLS(this.state, 'SignupStep1')
+    if (this.state.signupPassword1 !== this.state.signupPassword1) {
+      // throw an error to fix the form
+    } else {
+      signup.saveToLS(this.state, 'SignupStep1')
+      const path = `/signup/step-2`
+      browserHistory.push(path)
+    }
 
 
 console.log(this.state);
