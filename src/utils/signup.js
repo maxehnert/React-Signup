@@ -1,6 +1,5 @@
 import axios from 'axios'
 import valid from 'card-validator'
-import { BASE_API_URL, BASE_CHARGIFY_URL } from './auth'
 
 const saveToLS = (dataObj, name) => {
     // // if the data is already in LS, update it
@@ -39,7 +38,7 @@ const validateCC = (stateObj, cb) => {
 }
 
 const signupUser = (data, token, cb) => {
-  axios.post(`${BASE_API_URL}v2-signup`, {
+  axios.post(`https://example.com/signup`, {
     email: data.signupEmail,
     username: data.signupEmail,
     password: data.signupPassword1,

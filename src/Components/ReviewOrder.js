@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { signupUser } from '../utils/signup'
+import { browserHistory } from 'react-router'
 import { UserInfo, SubInfo } from './ReviewItems'
 
 class ReviewOrder extends Component {
@@ -12,7 +12,7 @@ class ReviewOrder extends Component {
     event.preventDefault()
     const value = event.currentTarget.value
     console.log(event.currentTarget.value);
-    if (value === submit) {
+    if (value === 'submit') {
       // Do all the create user and send infor off to chargify stuff
       // Then navigate to the manage-subscription page
     } else {

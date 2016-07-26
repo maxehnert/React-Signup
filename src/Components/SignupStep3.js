@@ -6,7 +6,6 @@ class SignupStep3 extends Component {
   constructor(props) {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleKeyCode = this.handleKeyCode.bind(this)
   }
 
   componentWillMount() {
@@ -33,32 +32,6 @@ class SignupStep3 extends Component {
     }
 
     this.setState({[name]: value})
-  }
-
-  handleKeyCode(event) {
-    const name = event.target.name
-    const keyCode = event.keyCode
-    let value = event.target.value
-
-    // if (name == 'signupCardExp' && value.length == 2 && keyCode !== 8 && keyCode !== 46) {
-    //   value = value +' / '
-    //   this.setState({[name]: value})
-    // } else if (name == 'signupCardExp' && value.length == 3 && keyCode !== 8 && keyCode !== 46) {
-    //   value = value +' / '
-    // }
-
-    // this.setState({[name]: value})
-    // console.log(this.state);
-
-    // delete keyCode 46; backspace keyCode 8
-    // console.log('name', name);
-    // console.log('value',value);
-    // console.log('charCode', event.charCode);
-    // console.log('detail', event.detail);
-    // console.log('key', event.key);
-    // console.log('keyCode', event.keyCode);
-    // console.log('type', event.type);
-    // console.log('which', event.which);
   }
 
   handleSubmit(event) {
@@ -122,7 +95,6 @@ console.log(this.state);
                 tabIndex="3"
                 className="form-control signup-expiration-month-year signup-card-exp"
                 maxLength="7"
-                onKeyUp={this.handleKeyCode}
                 onChange={this.handleChange}
                 defaultValue={this.state.signupCardExp}/>
             </div>

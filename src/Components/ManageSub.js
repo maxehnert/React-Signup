@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
-import auth from '../utils/auth'
 
 class ManageSub extends Component {
   constructor(props) {
@@ -33,21 +32,10 @@ class ManageSub extends Component {
     event.preventDefault()
 
     const optionsRadiosValue = event.target.elements.optionsRadios.value
-    console.log(optionsRadiosValue);
-console.log(user);
-    auth.updateSubscription(optionsRadiosValue, referenceId, (g2g) => {
-      console.log('g2g?', g2g);
-      if (!g2g) {
-        return this.setState({ error: true })
-      } else {
-        this.setState({error: false})
-      }
-    })
+    console.log(optionsRadiosValue)
   }
 
   render() {
-    console.log('props', this.props);
-    console.log('state', this.state);
     return (
       <div className="row container">
         <div>

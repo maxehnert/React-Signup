@@ -29,7 +29,7 @@ console.log('refs ',this.refs, this.refs.token.value.length);
     const pass = this.refs.password.value
     const token = this.refs.token.value
 
-    auth.boxLogin(email, pass, token, (loggedIn) => {
+    auth.login(email, pass, token, (loggedIn) => {
       console.log('loggedIn', loggedIn);
       if (!loggedIn) {
         return this.setState({ error: true })
@@ -79,9 +79,6 @@ console.log('refs ',this.refs, this.refs.token.value.length);
               ref="token"
               onChange={this.handleChange}/>
           </div>
-
-          {/*<label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-          <label><input ref="pass" placeholder="password" /></label> (hint: password1)<br />*/}
           <button type="submit" className="btn btn-default continue">login</button>
           {this.state.error && (
             <p>Bad login information</p>
